@@ -77,16 +77,23 @@ function AdminControls() {
     }
   };
 
-  // Restart the Draw
+  // Start or Restart the Draw
   const onRestartDraw = async () => {
-    const notification = toast.loading("Restarting Draw...");
+    const notification = toast.loading(
+      currDraw ? "Restarting Draw..." : "Starting Draw..."
+    );
 
     try {
       const data = await restartDraw({ args: [] });
 
-      toast.success("Draw Restarted Successfully!", {
-        id: notification,
-      });
+      toast.success(
+        currDraw
+          ? "Draw Restarted Successfully!"
+          : "Draw started successfully!",
+        {
+          id: notification,
+        }
+      );
       console.info("Contract call Success", data);
     } catch (err) {
       toast.error("Whoops! Something went wrong!", {
