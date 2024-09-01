@@ -36,6 +36,9 @@ function AdminControls() {
     "WithdrawCommission"
   );
 
+  const { data: expiration } = useContractRead(contract, "expiration");
+  const currDraw = new Date() < new Date(expiration * 1000);
+
   // to pick or select the winner
   const drawWinner = async () => {
     const notification = toast.loading("Picking a lucky Winner...");
@@ -105,7 +108,7 @@ function AdminControls() {
       });
       console.info("Contract call Success!", data);
     } catch (err) {
-      toast.error("Whoops! Something went wrong!", {
+      toast.error("Lottery not expired yet!", {
         id: notification,
       });
       console.error("Contract call failure!", err);
@@ -133,7 +136,7 @@ function AdminControls() {
         </button>
         <button onClick={onRestartDraw} className="admin-button">
           <ArrowPathIcon className="h-6 mx-auto mb-2" />
-          Restart Draw
+          {currDraw ? "Restart Draw" : "Start Draw"}
         </button>
         <button onClick={onRefundAll} className="admin-button">
           <ArrowUturnDownIcon className="h-6 mx-auto mb-2" />

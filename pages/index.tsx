@@ -43,6 +43,7 @@ const Home: NextPage = () => {
     "ticketCommission"
   );
   const { data: expiration } = useContractRead(contract, "expiration");
+
   const { data: winnings } = useContractRead(
     contract,
     "getWinningsForAddress",
@@ -123,7 +124,7 @@ const Home: NextPage = () => {
   };
   if (isLoading)
     return (
-      <div className="bg-[#091B18] h-screen flex flex-col items-center justify-center ">
+      <div className="bg-[#292828] h-screen flex flex-col items-center justify-center ">
         <div className="flex items-center space-x-5 mb-10">
           <img
             className="rounded-full h-20 w-20"
@@ -176,7 +177,7 @@ const Home: NextPage = () => {
             className=" p-5 bg-gradient-to-b from-orange-500 to-emerald-600 animate-pulse text-center rounded-xl w-full"
           >
             <p className="font-bold">
-              Congratulations!!!(Winner!!!) You have won the Lottery
+              Congratulations!!! You have won the Lottery!
             </p>
             <p className="mt-3">
               Total Winnings :{ethers.utils.formatEther(winnings.toString())}{" "}
@@ -220,7 +221,7 @@ const Home: NextPage = () => {
         <div className="stats-container space-y-2">
           <div className="stats-container">
             <div className="flex justify-between items-center text-white pb-2">
-              <h2> Price per Ticket </h2>
+              <h2> Price per ticket </h2>
               <p>
                 {ticketPrice &&
                   ethers.utils.formatEther(ticketPrice.toString())}{" "}
@@ -259,11 +260,6 @@ const Home: NextPage = () => {
                     ethers.utils.formatEther(ticketCommission.toString())}{" "}
                   {currency}
                 </p>
-              </div>
-
-              <div className="flex items-cenetr justify-between text-emerald-300 text-xs italic">
-                <p>+ Network fees</p>
-                <p>TBC</p>
               </div>
             </div>
 
